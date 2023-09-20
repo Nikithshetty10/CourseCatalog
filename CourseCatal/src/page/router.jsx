@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import CourseTable from './CourseTable';
 import CourseForm from './CourseForm';
+// import TestDropdown from './TestDropdown';
 
 const RouterPage = (props) => {
     return (
@@ -15,14 +16,15 @@ const RouterPage = (props) => {
                 <Route path='/' exact>
                     <CourseTable {...props} />
                 </Route>
-                <Route path='/course-form'>
+                <Route path='/course-form/:id?'>
                     <CourseForm {...props} />
                 </Route>
+
                 {/* Add more Routes here as needed */}
             </Switch>
         </Router>
     );
-};
+}; 
 
 RouterPage.propTypes = {
     pageInfo: PropTypes.object

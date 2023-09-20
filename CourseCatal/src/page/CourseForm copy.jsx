@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import axios from 'axios';
-import LogoExample from './Logo';
 import { useHistory, useParams } from 'react-router-dom';
 import { 
     TextField, DatePicker, Dropdown, DropdownItem, Checkbox, Button, 
      FormControlLabel 
 } from '@ellucian/react-design-system/core';
-import { parseISO } from 'date-fns';
 
 //newly added
 
@@ -118,11 +116,7 @@ function CourseForm() {
         if (id) {
             axios.get(`http://localhost:3005/api/courses/${id}`)
                 .then((response) => {
-                    const courseData = response.data;
-                    courseData.startDate = parseISO(courseData.startDate);
-                    courseData.endDate = parseISO(courseData.endDate);
-                    courseData.isOpenForRegistration = courseData.isOpenForRegistration === 'OPEN';
-                    setCourse(courseData);
+                    setCourse(response.data);
                 });
         }
     }, [id]);
@@ -235,7 +229,6 @@ function CourseForm() {
 
     return (
         <div>
-            <LogoExample />
             <Button onClick={handleBack}>Back</Button>
             <br /> {/* Line break for spacing */}
             <form onSubmit={handleSubmit}>

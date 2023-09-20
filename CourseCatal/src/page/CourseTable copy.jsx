@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { withStyles } from '@ellucian/react-design-system/core/styles';
-import { Typography } from '@ellucian/react-design-system/core';
 import {
     Table,
     TableHead,

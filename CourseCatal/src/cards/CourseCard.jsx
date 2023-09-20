@@ -28,7 +28,7 @@ const CourseCard = (props) => {
                 <span>
                     This is the card for Course catalog
                 </span>
-                <Button onClick={() => navigateToPage({ route: '/course-form' })}>
+                <Button onClick={() => navigateToPage({ route:'/'})}>
                     Click Here
                 </Button>
             </Typography>

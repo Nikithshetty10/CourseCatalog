@@ -27,7 +27,7 @@ const CourseSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['Online', 'Offline'], // You can add more types here
+    enum: ['Graduate', 'Undergraduate'], // You can add more types here
     required: false
   },
   credits: {

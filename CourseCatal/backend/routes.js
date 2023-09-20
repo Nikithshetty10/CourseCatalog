@@ -17,9 +17,49 @@ router.post('/api/courses', async (req, res) => {
 router.get('/api/courses', async (req, res) => {
   try {
     const courses = await Course.find({});
-    res.send(courses);
+    const currentDate = new Date();
+
+    const coursesWithStatus = courses.map(course => {
+      let isOpenForRegistration = "CLOSED";
+      if (currentDate <= new Date(course.endDate) && currentDate >= new Date(course.startDate)) {
+        isOpenForRegistration = "OPEN";
+      }
+
+      return {
+        ...course._doc,
+        isOpenForRegistration
+      };
+    });
+
+    res.send(coursesWithStatus);
   } catch (err) {
     res.status(500).send();
+  }
+});
+
+// Get a single course by ID
+router.get('/api/courses/:id', async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+
+    if (!course) {
+      return res.status(404).send({ error: 'Course not found' });
+    }
+
+    let isOpenForRegistration = "CLOSED";
+    const currentDate = new Date();
+    if (currentDate <= new Date(course.endDate) && currentDate >= new Date(course.startDate)) {
+      isOpenForRegistration = "OPEN";
+    }
+
+    const courseWithStatus = {
+      ...course._doc,
+      isOpenForRegistration
+    };
+
+    res.json(courseWithStatus);
+  } catch (err) {
+    res.status(500).send({ error: 'Internal server error' });
   }
 });
 
